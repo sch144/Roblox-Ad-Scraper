@@ -1,0 +1,9 @@
+{
+    "threads": 10,
+    "sleep": 5,
+    "webserver": false,
+
+    "banner": "https://discord.com/api/webhooks/",
+    "skyscraper": "https://discord.com/api/webhooks/",
+    "square": "https://discord.com/api/webhooks/"
+}
