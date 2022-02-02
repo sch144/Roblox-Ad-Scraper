@@ -4,6 +4,8 @@ import time
 import json
 import requests
 import threading
+from unshortenit import UnshortenIt
+unshortener = UnshortenIt()
 
 with open("settings.json") as fp:
     _settings = json.load(fp)
@@ -66,14 +68,14 @@ def ad1():
             req_img = re.search('<img src=\"(.*?)\" alt=\"(.*?)\"', req.text).group(1)
             req_text = re.search('<img src=\"(.*?)\" alt=\"(.*?)\"', req.text).group(2)
             req_link = re.search('<a class=\"(.*?)\" title=\"(.*?)\" href=\"(.*?)\"', req.text).group(3)
-            count1+=1
+            uri = unshortener.unshorten(req_link)
             print(req_link)
             if req_img not in _list1:
                 _list1.append(req_img)
                 with open("list1.txt", "a") as list1_txt:
                     list1_txt.write(f"{req_img}\n")
                     list1_txt.close()
-                print(f"Ads scraped! Ads Name: {req_text} | {req_img} | {req_link}", end="\n")
+                print(f"Ads scraped! Ads Name: {req_text} | {req_img} | {uri}", end="\n")
                 embed = {
                     "content": None,
                     "embeds": [
@@ -81,7 +83,7 @@ def ad1():
                             "title": "New ad found!",
                             "description": f"**Name**: {req_text}",
                             "color": 2607871,
-                            "url": req_link,
+                            "url": uri,
                             "image": {
                                 "url": req_img
                             }
@@ -104,13 +106,14 @@ def ad2():
             req_img = re.search('<img src=\"(.*?)\" alt=\"(.*?)\"', req.text).group(1)
             req_text = re.search('<img src=\"(.*?)\" alt=\"(.*?)\"', req.text).group(2)
             req_link = re.search('<a class=\"(.*?)\" title=\"(.*?)\" href=\"(.*?)\"', req.text).group(3)
+            uri = unshortener.unshorten(req_link)
             count2+=1
             if req_img not in _list2:
                 _list2.append(req_img)
                 with open("list2.txt", "a") as list2_txt:
                     list2_txt.write(f"{req_img}\n")
                     list2_txt.close()
-                print(f"Ads scraped! Ads Name: {req_text} | {req_img} | {req_link}", end="\n")
+                print(f"Ads scraped! Ads Name: {req_text} | {req_img} | {uri}", end="\n")
                 embed = {
                     "content": None,
                     "embeds": [
@@ -118,7 +121,7 @@ def ad2():
                             "title": "New ad found!",
                             "description": f"**Name**: {req_text}",
                             "color": 2607871,
-                            "url": req_link,
+                            "url": uri,
                             "image": {
                                 "url": req_img
                             }
@@ -141,13 +144,14 @@ def ad3():
             req_img = re.search('<img src=\"(.*?)\" alt=\"(.*?)\"', req.text).group(1)
             req_text = re.search('<img src=\"(.*?)\" alt=\"(.*?)\"', req.text).group(2)
             req_link = re.search('<a class=\"(.*?)\" title=\"(.*?)\" href=\"(.*?)\"', req.text).group(3)
+            uri = unshortener.unshorten(req_link)
             count3+=1
             if req_img not in _list3:
                 _list3.append(req_img)
                 with open("list3.txt", "a") as list3_txt:
                     list3_txt.write(f"{req_img}\n")
                     list3_txt.close()
-                print(f"Ads scraped! Ads Name: {req_text} | {req_img} | {req_link}", end="\n")
+                print(f"Ads scraped! Ads Name: {req_text} | {req_img} | {uri}", end="\n")
                 embed = {
                     "content": None,
                     "embeds": [
@@ -155,7 +159,7 @@ def ad3():
                             "title": "New ad found!",
                             "description": f"**Name**: {req_text}",
                             "color": 2607871,
-                            "url": req_link,
+                            "url": uri,
                             "image": {
                                 "url": req_img
                             }
